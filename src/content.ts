@@ -1,12 +1,26 @@
+/**
+ * Finds single element based on XPath
+ * @param path XPath to evaluate
+ * @returns element if found
+ */
 function getElementByXpath(path: string) {
     return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 }
 
+/**
+ * Gets all checkboxes that are in table
+ * @returns Node list of checkbox elements
+ */
 function getAllCheckboxes(): NodeListOf<Element> {
     const elements = document.querySelectorAll("#cms-content-body-main > * > * > * > * > input");
     return elements;
 }
 
+/**
+ * Goes through list of checkboxes and sets their checked attribute
+ * @param checkboxes to go through
+ * @param checked state that will be set
+ */
 function checkCheckboxes(checkboxes: NodeListOf<Element>, checked: boolean) {
     for (let i = 0; i < checkboxes.length; i++) {
         let checkbox = checkboxes[i] as HTMLInputElement;
@@ -14,6 +28,9 @@ function checkCheckboxes(checkboxes: NodeListOf<Element>, checked: boolean) {
     }
 }
 
+/**
+ * Runs when the document is fully loaded
+ */
 function onDocumentLoaded() {
     // Get header element
     const parent = getElementByXpath("/html/body/div[4]/div[2]/div[2]/div[2]/form/div[1]/div[5]");
